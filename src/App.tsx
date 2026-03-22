@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import { Layout } from './components/layout/Layout';
 
 // Pages
@@ -10,7 +10,7 @@ import Settings from './pages/Settings';
 
 function App() {
   return (
-    <Router>
+    <Router basename="/PettyBox">
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<Dashboard />} />

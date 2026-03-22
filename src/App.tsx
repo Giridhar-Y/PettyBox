@@ -1,12 +1,10 @@
-import { HashRouter as Router, Routes, Route } from 'react-router-dom';
+import { HashRouter as Router, Route, Routes } from 'react-router-dom';
 import { Layout } from './components/layout/Layout';
-
-// Pages
-import Dashboard from './pages/Dashboard';
 import Claims from './pages/Claims';
+import Dashboard from './pages/Dashboard';
 import Entities from './pages/Entities';
-import Team from './pages/Team';
 import Settings from './pages/Settings';
+import Team from './pages/Team';
 
 function App() {
   return (

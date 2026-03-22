@@ -6,6 +6,7 @@ import Dashboard from './pages/Dashboard';
 import Claims from './pages/Claims';
 import Entities from './pages/Entities';
 import Team from './pages/Team';
+import Settings from './pages/Settings';
 
 function App() {
   return (
@@ -16,7 +17,7 @@ function App() {
           <Route path="/claims" element={<Claims />} />
           <Route path="/entities" element={<Entities />} />
           <Route path="/team" element={<Team />} />
-          <Route path="/settings" element={<div className="p-4">Settings Page Stub</div>} />
+          <Route path="/settings" element={<Settings />} />
         </Route>
       </Routes>
     </Router>

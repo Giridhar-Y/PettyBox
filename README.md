@@ -1,73 +1,63 @@
-# React + TypeScript + Vite
+# PettyBox
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+PettyBox is a local-first petty cash workspace built with React, TypeScript, and Vite. It provides a finance-oriented UI for reviewing claims, managing entities and teams, and adjusting workspace settings without requiring a backend service.
 
-Currently, two official plugins are available:
+## What It Does
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Review and update petty cash claims
+- Create new claims with attached receipt files
+- Manage legal entities and team directories
+- Persist workspace data in the browser with seeded demo data
+- Export claims and directory data to Excel or PDF
 
-## React Compiler
+## Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React 19
+- TypeScript
+- Vite 8
+- Tailwind CSS 4
+- Framer Motion
+- Recharts
+- jsPDF and SheetJS
+- Sonner
 
-## Expanding the ESLint configuration
+## Local Development
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Install dependencies if needed:
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Start the dev server:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm run dev
 ```
+
+Build for production:
+
+```bash
+npm run build
+```
+
+Run lint:
+
+```bash
+npm run lint
+```
+
+## Notes
+
+- Workspace data is stored in `localStorage` through [src/lib/mockData.ts](/d:/PettyBox/src/lib/mockData.ts).
+- The app seeds demo data on first load and supports resetting the workspace from the Settings page.
+- There is no backend integration yet. The current experience is intentionally local-first so the product can be demoed and iterated quickly.
+
+## Verification Status
+
+Current repository state has been verified with:
+
+- `npm.cmd run lint`
+- `npm.cmd run build`
+
+The production build succeeds. Vite still reports a large chunk warning, so code-splitting would be a good next optimization step before shipping broadly.

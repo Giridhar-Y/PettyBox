@@ -1,5 +1,5 @@
 import React from 'react';
-import { cn } from '../layout/Sidebar';
+import { cn } from '../../lib/utils';
 import { Loader2 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import type { HTMLMotionProps } from 'framer-motion';

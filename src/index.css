@@ -6,22 +6,68 @@
 }
 
 @layer base {
+  :root {
+    color-scheme: light;
+    --page-bg: #f6f4ee;
+    --page-panel: rgba(255, 255, 255, 0.72);
+    --page-line: rgba(24, 24, 27, 0.08);
+    --page-accent: #c97342;
+    --page-accent-soft: rgba(201, 115, 66, 0.14);
+  }
+
+  * {
+    @apply border-zinc-200;
+  }
+
+  html {
+    @apply scroll-smooth;
+  }
+
   body {
-    @apply bg-[#fafafa] text-[#111111] font-sans antialiased selection:bg-black selection:text-white;
+    @apply text-[#111111] font-sans antialiased selection:bg-black selection:text-white;
+    background:
+      radial-gradient(circle at top left, rgba(201, 115, 66, 0.14), transparent 24rem),
+      radial-gradient(circle at top right, rgba(15, 118, 110, 0.1), transparent 22rem),
+      linear-gradient(180deg, #fbfaf6 0%, var(--page-bg) 100%);
+    min-height: 100vh;
+  }
+
+  #root {
+    min-height: 100vh;
   }
 }
 
 @layer components {
-  /* Attio-style minimal cards: white, crisp border, minimal shadow */
   .card {
-    @apply bg-white rounded-xl border border-zinc-200/80 shadow-[0_1px_3px_rgba(0,0,0,0.02)] overflow-hidden;
+    @apply rounded-[24px] border shadow-[0_12px_40px_rgba(15,23,42,0.06)] overflow-hidden;
+    background: var(--page-panel);
+    backdrop-filter: blur(16px);
+    border-color: var(--page-line);
   }
 
   .input-field {
-    @apply block w-full rounded-lg border-zinc-200 shadow-sm focus:border-black focus:ring-1 focus:ring-black sm:text-sm px-3 py-2 border outline-none disabled:bg-zinc-50 disabled:text-zinc-500 transition-all duration-200;
+    @apply block w-full rounded-2xl shadow-sm sm:text-sm px-4 py-3 border outline-none disabled:bg-zinc-50 disabled:text-zinc-500 transition-all duration-200;
+    background: rgba(255, 255, 255, 0.9);
+    border-color: rgba(24, 24, 27, 0.08);
   }
 
-  /* Magic Border Animation */
+  .input-field:focus {
+    border-color: rgba(201, 115, 66, 0.65);
+    box-shadow: 0 0 0 4px rgba(201, 115, 66, 0.12);
+  }
+
+  .dashboard-mesh {
+    background:
+      linear-gradient(135deg, rgba(201, 115, 66, 0.12), rgba(15, 118, 110, 0.08)),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(255, 255, 255, 0.72));
+  }
+
+  .section-eyebrow {
+    @apply inline-flex items-center gap-2 rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.22em];
+    background: rgba(24, 24, 27, 0.05);
+    color: #66615d;
+  }
+
   .magic-border {
     --bg-color: #ffffff;
     border: 1px solid transparent;

@@ -1,84 +1,106 @@
 import { NavLink, useLocation } from 'react-router-dom';
-import { 
-  Building2, 
-  LayoutDashboard, 
-  FileText, 
-  Users, 
-  Settings,
+import {
+  Building2,
+  Command,
+  FileText,
+  LayoutDashboard,
   LogOut,
-  Command
+  Settings,
+  Sparkles,
+  Users,
 } from 'lucide-react';
-import { clsx } from 'clsx';
-import { twMerge } from 'tailwind-merge';
 import { motion } from 'framer-motion';
-
-export function cn(...inputs: (string | undefined | null | false)[]) {
-  return twMerge(clsx(inputs));
-}
+import { cn } from '../../lib/utils';
 
 const navItems = [
-  { name: 'Dashboard', to: '/', icon: LayoutDashboard },
-  { name: 'Claims', to: '/claims', icon: FileText },
-  { name: 'Entities', to: '/entities', icon: Building2 },
-  { name: 'Team', to: '/team', icon: Users },
-  { name: 'Settings', to: '/settings', icon: Settings },
+  { name: 'Dashboard', to: '/', icon: LayoutDashboard, hint: 'Overview' },
+  { name: 'Claims', to: '/claims', icon: FileText, hint: 'Workflow' },
+  { name: 'Entities', to: '/entities', icon: Building2, hint: 'Finance map' },
+  { name: 'Team', to: '/team', icon: Users, hint: 'People' },
+  { name: 'Settings', to: '/settings', icon: Settings, hint: 'Controls' },
 ];
 
 export function Sidebar() {
   const location = useLocation();
 
   return (
-    <div className="flex flex-col w-64 bg-[#fbfbfb] text-zinc-600 min-h-screen border-r border-zinc-200/60 transition-all duration-300 ease-in-out">
-      <div className="h-16 flex items-center px-6 mt-2 mb-4">
-        <div className="flex items-center gap-2.5 text-black">
-          <div className="bg-black text-white p-1 rounded-lg shadow-sm">
-            <Command className="w-5 h-5" />
+    <aside className="hidden lg:flex lg:w-[292px] lg:flex-col lg:border-r lg:border-zinc-200/60 lg:bg-[rgba(255,255,255,0.46)] lg:backdrop-blur-xl">
+      <div className="flex h-full flex-col px-5 py-5">
+        <div className="card dashboard-mesh p-4">
+          <div className="flex items-center gap-3">
+            <div className="rounded-2xl bg-black p-2 text-white shadow-lg shadow-black/10">
+              <Command className="h-5 w-5" />
+            </div>
+            <div>
+              <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-zinc-500">Workspace</p>
+              <h1 className="text-xl font-bold tracking-tight text-zinc-950">PettyBox</h1>
+            </div>
           </div>
-          <span className="text-lg font-bold tracking-tight text-zinc-900">Pettybox</span>
-        </div>
-      </div>
-
-      <div className="flex-1 px-4 flex flex-col gap-0.5 overflow-y-auto">
-        <div className="mb-4 px-2">
-          <p className="text-[11px] font-semibold tracking-wider text-zinc-400 uppercase">Menu</p>
-        </div>
-
-        {navItems.map((item) => {
-          const isActive = location.pathname === item.to || (item.to !== '/' && location.pathname.startsWith(item.to));
-          
-          return (
-            <NavLink
-              key={item.name}
-              to={item.to}
-              className="relative flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium outline-none transition-colors group"
-            >
-              {isActive && (
-                <motion.div
-                  layoutId="sidebar-active"
-                  className="absolute inset-0 bg-white shadow-sm border border-zinc-200/50 rounded-lg"
-                  initial={false}
-                  transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                />
-              )}
-              
-              <div className={cn(
-                "relative z-10 flex items-center gap-3 transition-colors",
-                isActive ? "text-black" : "text-zinc-500 group-hover:text-black"
-              )}>
-                <item.icon className={cn("w-[18px] h-[18px] flex-shrink-0 transition-colors", isActive ? "text-black" : "text-zinc-400 group-hover:text-zinc-700")} strokeWidth={isActive ? 2.5 : 2} />
-                {item.name}
+          <div className="mt-5 rounded-2xl border border-white/70 bg-white/80 p-3">
+            <div className="flex items-start gap-3">
+              <div className="rounded-xl bg-[rgba(201,115,66,0.14)] p-2 text-[color:var(--page-accent)]">
+                <Sparkles className="h-4 w-4" />
               </div>
-            </NavLink>
-          );
-        })}
-      </div>
+              <div>
+                <p className="text-sm font-semibold text-zinc-900">Local finance workspace</p>
+                <p className="mt-1 text-[13px] leading-relaxed text-zinc-600">
+                  Claims, teams, and entities stay persisted in this browser so the workspace feels stable during review.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
 
-      <div className="p-4">
-        <button className="flex w-full items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium hover:bg-zinc-100 text-zinc-500 hover:text-black transition-colors duration-200 group">
-          <LogOut className="w-[18px] h-[18px] text-zinc-400 group-hover:text-black transition-colors" />
-          Sign Out
-        </button>
+        <div className="mt-6 px-2">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-zinc-400">Navigation</p>
+        </div>
+
+        <nav className="mt-3 flex-1 space-y-1 overflow-y-auto">
+          {navItems.map((item) => {
+            const isActive = location.pathname === item.to || (item.to !== '/' && location.pathname.startsWith(item.to));
+
+            return (
+              <NavLink
+                key={item.name}
+                to={item.to}
+                className="relative block rounded-2xl outline-none transition-colors group"
+              >
+                {isActive && (
+                  <motion.div
+                    layoutId="sidebar-active"
+                    className="absolute inset-0 rounded-2xl border border-[rgba(24,24,27,0.08)] bg-white shadow-[0_10px_24px_rgba(15,23,42,0.08)]"
+                    initial={false}
+                    transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+                  />
+                )}
+
+                <div className={cn('relative z-10 flex items-center justify-between gap-3 px-4 py-3', isActive ? 'text-black' : 'text-zinc-500 group-hover:text-black')}>
+                  <div className="flex items-center gap-3">
+                    <item.icon className={cn('h-[18px] w-[18px] transition-colors', isActive ? 'text-black' : 'text-zinc-400 group-hover:text-zinc-700')} strokeWidth={isActive ? 2.4 : 2} />
+                    <div>
+                      <p className="text-sm font-semibold">{item.name}</p>
+                      <p className="text-[12px] text-zinc-400">{item.hint}</p>
+                    </div>
+                  </div>
+                  {isActive && <span className="h-2.5 w-2.5 rounded-full bg-[color:var(--page-accent)]" />}
+                </div>
+              </NavLink>
+            );
+          })}
+        </nav>
+
+        <div className="mt-6 rounded-[24px] border border-zinc-200/70 bg-white/75 p-4 shadow-[0_10px_30px_rgba(15,23,42,0.05)]">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-zinc-400">Session</p>
+          <p className="mt-2 text-sm font-semibold text-zinc-900">JD is active</p>
+          <p className="mt-1 text-[13px] leading-relaxed text-zinc-500">
+            Review, update, and export workspace data from one place.
+          </p>
+          <button className="mt-4 flex w-full items-center justify-center gap-3 rounded-2xl border border-zinc-200 bg-zinc-50 px-3 py-2.5 text-sm font-medium text-zinc-600 transition-colors duration-200 hover:bg-zinc-100 hover:text-black">
+            <LogOut className="h-[18px] w-[18px]" />
+            Sign Out
+          </button>
+        </div>
       </div>
-    </div>
+    </aside>
   );
 }

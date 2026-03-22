@@ -10,7 +10,7 @@ import Settings from './pages/Settings';
 
 function App() {
   return (
-    <Router basename="/PettyBox">
+    <Router>
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<Dashboard />} />

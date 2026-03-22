@@ -1,0 +1,26 @@
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Layout } from './components/layout/Layout';
+
+// Pages
+import Dashboard from './pages/Dashboard';
+import Claims from './pages/Claims';
+import Entities from './pages/Entities';
+import Team from './pages/Team';
+
+function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route element={<Layout />}>
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/claims" element={<Claims />} />
+          <Route path="/entities" element={<Entities />} />
+          <Route path="/team" element={<Team />} />
+          <Route path="/settings" element={<div className="p-4">Settings Page Stub</div>} />
+        </Route>
+      </Routes>
+    </Router>
+  );
+}
+
+export default App;

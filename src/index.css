@@ -1,0 +1,58 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+@theme {
+  --font-sans: "Inter", system-ui, sans-serif;
+}
+
+@layer base {
+  body {
+    @apply bg-[#fafafa] text-[#111111] font-sans antialiased selection:bg-black selection:text-white;
+  }
+}
+
+@layer components {
+  /* Attio-style minimal cards: white, crisp border, minimal shadow */
+  .card {
+    @apply bg-white rounded-xl border border-zinc-200/80 shadow-[0_1px_3px_rgba(0,0,0,0.02)] overflow-hidden;
+  }
+
+  .input-field {
+    @apply block w-full rounded-lg border-zinc-200 shadow-sm focus:border-black focus:ring-1 focus:ring-black sm:text-sm px-3 py-2 border outline-none disabled:bg-zinc-50 disabled:text-zinc-500 transition-all duration-200;
+  }
+
+  /* Magic Border Animation */
+  .magic-border {
+    --bg-color: #ffffff;
+    border: 1px solid transparent;
+    background: 
+      linear-gradient(var(--bg-color), var(--bg-color)) padding-box,
+      conic-gradient(from var(--border-angle), transparent 60%, rgba(59, 130, 246, 0.4), transparent 80%) border-box;
+    animation: border-spin 4s linear infinite;
+  }
+}
+
+@property --border-angle {
+  syntax: "<angle>";
+  inherits: true;
+  initial-value: 0turn;
+}
+
+@keyframes border-spin {
+  to {
+    --border-angle: 1turn;
+  }
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-4px); }
+  100% { transform: translateY(0px); }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+.hover-float:hover {
+  animation: float 3s ease-in-out infinite;
+}

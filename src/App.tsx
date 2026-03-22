@@ -9,8 +9,7 @@ import Team from './pages/Team';
 
 function App() {
   return (
-    <Router>
-      <Routes>
+     <Router basename="/PettyBox">      <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<Dashboard />} />
           <Route path="/claims" element={<Claims />} />

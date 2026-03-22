@@ -1,4 +1,4 @@
-import { HashRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Layout } from './components/layout/Layout';
 
 // Pages
@@ -13,11 +13,12 @@ function App() {
     <Router basename="/PettyBox">
       <Routes>
         <Route element={<Layout />}>
-          <Route path="/" element={<Dashboard />} />
-          <Route path="/claims" element={<Claims />} />
-          <Route path="/entities" element={<Entities />} />
-          <Route path="/team" element={<Team />} />
-          <Route path="/settings" element={<Settings />} />
+          <Route index element={<Dashboard />} />
+          <Route path="dashboard" element={<Dashboard />} />
+          <Route path="claims" element={<Claims />} />
+          <Route path="entities" element={<Entities />} />
+          <Route path="team" element={<Team />} />
+          <Route path="settings" element={<Settings />} />
         </Route>
       </Routes>
     </Router>
